@@ -1,21 +1,32 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
 .container {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
+    background-image: linear-gradient(to bottom right, #FF61D2, #FE9090);
+
+
 }
 
 .calculator {
     width: 300px;
     outline: 2px solid black;
-    border-radius: 8px;
+    border-radius: 12px;
+    background-color: rgba(255, 228, 196, 0.504);
+    box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.5), 0 8px 20px 0 rgba(0, 0, 0, 0.5);
 }
 
 .input {
-    height: 80px;
+    height: 100px;
     width: auto;
-    border: 2px solid rgba(0, 0, 0, 0.761);
-    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid black;
+    border-radius: 12px;
+    box-shadow: 0 4px 5px rgba(0, 0, 0, 0.19);
 }
 
 .row1, .row2, .row3, .row4, .row5 {
@@ -23,12 +34,23 @@
 }
 .row1 div, .row2 div, .row3 div, 
 .row4 div, .row5 div {
-    border: 1px solid rgb(0, 0, 0);
-    height: 40px;
+    height: 60px;
     flex: 1;
     font-size: larger;
     font-weight: 600;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+#equal {
+    flex: 2;
+    border-radius: 12px 12px 8px 12px;
+    background-image: linear-gradient(to bottom right, #0100EC, #FB36F4);
+}
+
+.row1 div:hover, .row2 div:hover,
+.row3 div:hover, .row4 div:hover,
+.row5 div:hover {
+    background-image:linear-gradient(to bottom right, #FDFCFB, #E2D1C3);
 }
