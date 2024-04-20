@@ -1,9 +1,9 @@
 function divide(a, b) {
-    return Math.round((a / b) * 1000) / 1000;
+    return Math.round((a / b) * 10000) / 10000;
 }
 
 function multiply(a, b) {
-    return Math.round((a * b) * 1000) /1000;
+    return Math.round((a * b) * 10000) /10000;
 }
 
 function divideByHundred(n) {
@@ -28,34 +28,56 @@ function operate(num1, operator, num2) {
 let num1;
 let num2;
 let operator;
-let inputValue; // store input value for calculation
+let inputValue;
+let result = 0; // store results of operate fn 
 
-let array = [];
-function getOperands() {
-    array = inputValue.split(/[+\-\/%*]/g); // get two operands
-    num1 = Number(array[0]);
-    num2 = Number(array[1]); 
-}
 
 let input = document.querySelector('.input');
 let buttons = document.querySelectorAll('.btn');
 buttons.forEach((button) => {
     button.addEventListener("click", () => {
         let text = button.textContent || button.innerText;
-        if(text != '=') {
+        if(text != '=' && text != 'del') {
             input.textContent += text;
         }
-        inputValue = input.textContent || input.innerText;
+
+    
         // select operator for calculation
-        if(button.id == 'operator') operator = button.textContent || button.innerText;
-        // show result
-        if(button.id == 'equal') {
-            getOperands();
-            // only calculate when user has entered both operands and operator
-            if(array.length == 2) input.textContent = operate(num1, operator, num2);
+        if(button.id == 'operator') {
+            operator = button.textContent || button.innerText;
+            num1 = Number(input.textContent.slice(0, -1));
         }
+
+        if(operator) {
+            num2 = getNum2();
+        }
+        
+        if(button.id == 'equal') {
+            result = operate(num1, operator, num2);
+            input.textContent = result;
+        }
+        if(text == '%') {
+            input.textContent = operate(num1, '%');
+            
+        }
+        if(text == 'C') {
+            input.textContent = '';
+            result = 0;
+            operator = '';
+            num1 = 0;
+            num2 = 0;
+        }
+        if(text == 'del') { // delete last entered input
+            let lastEntered = input.textContent.slice(0, -1);
+            input.textContent = lastEntered;
+        }
+        inputValue = input.textContent;
       });
       
 });
 
-
+function getNum2() {
+    inputValue = input.textContent;
+    let array = inputValue.split(/[+*/-]/g);
+    return Number(array[array.length - 1]);
+}
